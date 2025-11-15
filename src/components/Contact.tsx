@@ -1,15 +1,39 @@
 import { MapPin, Phone, Mail } from "lucide-react";
+import { useEffect, useState } from "react";
 
 export function Contact() {
+  // Detect dark mode
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
+    setIsDark(media.matches);
+    media.addEventListener("change", (e) => setIsDark(e.matches));
+    return () => media.removeEventListener("change", () => {});
+  }, []);
+
+  // Light Map
+  const lightMap =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2658.93501307747!2d16.35194457688354!3d48.19679287122165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d079e5136d36f%3A0x8e1e676b6c0c8b0a!2sCafe%20Kafka!5e0!3m2!1sen!2sat!4v1700000000000";
+
+  // Dark Map (Google Maps Night Theme)
+  const darkMap =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2658.93501307747!2d16.35194457688354!3d48.19679287122165!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d079e5136d36f%3A0x8e1e676b6c0c8b0a!2sCafe%20Kafka!5e0!3m2!1sen!2sat!4v1700000000000&maptype=roadmap&style=feature:all%7Celement:geometry%7Ccolor:0x1d1d1d&style=feature:all%7Celement:labels.text.fill%7Ccolor:0xffffff";
+
   return (
     <section id="contact" className="py-20 px-4 bg-[#faf8f3]">
       <div className="max-w-6xl mx-auto">
+        
+        {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl mb-4 text-[#4a3f35]">Kontakt & Anfahrt</h2>
           <div className="w-24 h-1 bg-[#8b6f47] mx-auto"></div>
         </div>
 
+        {/* Info Cards */}
         <div className="grid md:grid-cols-3 gap-8 mb-12">
+          
+          {/* Address */}
           <div className="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
             <div className="flex justify-center mb-4">
               <div className="bg-[#8b6f47] bg-opacity-10 p-4 rounded-full">
@@ -25,6 +49,7 @@ export function Contact() {
             </p>
           </div>
 
+          {/* Phone */}
           <div className="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
             <div className="flex justify-center mb-4">
               <div className="bg-[#8b6f47] bg-opacity-10 p-4 rounded-full">
@@ -40,6 +65,7 @@ export function Contact() {
             </a>
           </div>
 
+          {/* Email */}
           <div className="bg-white p-8 rounded-lg shadow-lg text-center hover:shadow-xl transition-shadow">
             <div className="flex justify-center mb-4">
               <div className="bg-[#8b6f47] bg-opacity-10 p-4 rounded-full">
@@ -54,6 +80,7 @@ export function Contact() {
               kafka@cckg.at
             </a>
           </div>
+
         </div>
 
         {/* Reservation CTA */}
@@ -79,18 +106,19 @@ export function Contact() {
         </div>
 
         {/* Map */}
-        <div className="rounded-lg overflow-hidden shadow-xl">
+        <div className="rounded-lg overflow-hidden shadow-xl transition-opacity duration-300">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2659.0!2d16.3522!3d48.1967!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476d079e5136d36f%3A0x8e1e676b6c0c8b0a!2sCapistrangasse%208%2C%201060%20Wien%2C%20Austria!5e0!3m2!1sen!2sus!4v1234567890"
+            src={isDark ? darkMap : lightMap}
             width="100%"
             height="450"
             style={{ border: 0 }}
-            allowFullScreen
             loading="lazy"
+            allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
             title="Cafe Kafka Standort"
-          ></iframe>
+          />
         </div>
+
       </div>
     </section>
   );
