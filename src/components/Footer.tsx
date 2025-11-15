@@ -48,16 +48,20 @@ export function Footer() {
               <h4 className="mb-4 text-[#d4a574]">Folgen Sie uns</h4>
               <div className="flex gap-4 mb-6">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/cafekafkawien" // Updated Facebook link
                   className="bg-white/10 p-3 rounded-full hover:bg-[#d4a574] transition-colors"
                   aria-label="Facebook"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Facebook className="w-5 h-5" />
                 </a>
                 <a
-                  href="#"
+                  href="https://www.instagram.com/cafe.kafka.1060" // Updated Instagram link
                   className="bg-white/10 p-3 rounded-full hover:bg-[#d4a574] transition-colors"
                   aria-label="Instagram"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <Instagram className="w-5 h-5" />
                 </a>
@@ -125,6 +129,5 @@ export function Footer() {
     </footer>
   );
 }
-
 
 export default Footer;
